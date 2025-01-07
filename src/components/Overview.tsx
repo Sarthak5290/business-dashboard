@@ -7,8 +7,24 @@ import PieChartComponent from "./PieChartComponent";
 import { SupplierTable } from "./SuplierTable";
 import Cards from "./Cards";
 
+// interface DashboardData {
+//   top_selling_products: string[];
+//   supplier_payments: any[]; // You can refine this further based on the actual structure of supplier payments
+//   // Add other properties based on the response data
+// }
+
+interface SupplierPayment {
+  [key: string]: string; // Flexible but still avoids `any[]`
+}
+
+interface DashboardData {
+  top_selling_products: string[];
+  supplier_payments: SupplierPayment[]; // Refined the type
+}
+
+
 export const Overview = () => {
-  const [data, setData] = useState<any>(null); // Temporarily using `any`
+  const [data, setData] = useState<DashboardData | null>(null); // Use the specific type here
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {

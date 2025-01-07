@@ -39,13 +39,17 @@ interface DashboardData {
   supplier_payments: SupplierPayment[];
 }
 
+// Define the correct route segment config
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { date: string } }
 ) {
   try {
     // Validate date parameter
-    if (!params.date) {
+    if (!params?.date) {
       return NextResponse.json(
         { error: "Date parameter is required" },
         { status: 400 }
@@ -68,7 +72,7 @@ export async function GET(
     }
 
     // Cast the data to the correct type
-    const dashboardData = data as unknown as DashboardData;
+    const dashboardData = data as DashboardData;
 
     // Return the dashboard data
     return NextResponse.json(
@@ -80,45 +84,6 @@ export async function GET(
           "Cache-Control": "no-store, max-age=0",
         },
       }
-    );
-  } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
-}
-
-// Optional: Add POST method to create/update dashboard data
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { date: string } }
-) {
-  try {
-    const body = await request.json();
-
-    // Validate request body
-    if (!body) {
-      return NextResponse.json(
-        { error: "Request body is required" },
-        { status: 400 }
-      );
-    }
-
-    const { db } = await connectToDatabase();
-    const collection = db.collection("dashboard_data");
-
-    // Update or insert data
-    const result = await collection.updateOne(
-      { date: params.date },
-      { $set: body },
-      { upsert: true }
-    );
-
-    return NextResponse.json(
-      { success: true, message: "Data updated successfully", result },
-      { status: 200 }
     );
   } catch (error) {
     console.error("API Error:", error);
