@@ -12,38 +12,36 @@ import {
 } from "recharts";
 import { FaCaretDown } from "react-icons/fa";
 
-// Define types for the props and data structure
+// Define types for the data
 interface SupplierRecord {
   month: string;
   bags: number;
 }
 
-interface CustomerRecord {
-  bags: number;
-}
-
-interface DashboardData {
-  supplier_records: SupplierRecord[];
-  customer_records: CustomerRecord[];
-}
-
 interface LineChartComponentProps {
-  dashboardData: DashboardData[];
+  data: {
+    supplier_records: SupplierRecord[];
+    customer_records: { bags: number }[];
+  };
 }
 
-const LineChartComponent: React.FC<LineChartComponentProps> = ({
-  dashboardData,
-}) => {
-  // Safely access and transform data
-  const lineData =
-    dashboardData?.[0]?.supplier_records?.map((item, index) => ({
-      name: item?.month?.substring(0, 3) || "",
-      supplier: item?.bags || 0,
-      customer: dashboardData?.[0]?.customer_records?.[index]?.bags || 0,
-    })) || [];
+const LineChartComponent: React.FC<LineChartComponentProps> = ({ data }) => {
+  if (!data || !Array.isArray(data.supplier_records) || data.supplier_records.length === 0) {
+    return <p>Loading...</p>;
+  }
+
+  const supplierData = data.supplier_records || [];
+  const customerData = data.customer_records || [];
+
+  const lineData = supplierData.map((item: SupplierRecord, index: number) => ({
+    name: item?.month?.substring(0, 3) || "", // Extracting the first 3 letters of month
+    supplier: item?.bags || 0, // Default to 0 if no bags
+    customer: customerData[index]?.bags || 0, // Default to 0 if no bags
+  }));
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm">
+      {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex ml-8 items-center gap-2">
           <h3 className="text-lg font-semibold">Bags</h3>
@@ -65,6 +63,7 @@ const LineChartComponent: React.FC<LineChartComponentProps> = ({
               dataKey="supplier"
               stroke="none"
               fill="rgba(173, 216, 230, 0.2)"
+              isAnimationActive={false}
             />
             <CartesianGrid
               strokeDasharray="3 3"

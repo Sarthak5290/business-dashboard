@@ -2,24 +2,16 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-// Define types for the props and data structure
-interface Product {
-  item: string;
-  weight: number;
-}
-
-interface DashboardData {
-  top_selling_products: Product[];
-}
+// Colors for the chart
+const COLORS = ["#0EA5E9", "#93C5FD", "#BFDBFE", "#DBEAFE"];
 
 interface PieChartComponentProps {
-  dashboardData: DashboardData[];
+  topSellingProducts: { item: string; weight: number }[]; // Define the structure of the topSellingProducts
 }
 
-const PieChartComponent: React.FC<PieChartComponentProps> = ({ dashboardData }) => {
-  const COLORS = ["#0EA5E9", "#93C5FD", "#BFDBFE", "#DBEAFE"];
-
-  const pieData = dashboardData[0].top_selling_products.map((product) => ({
+const PieChartComponent: React.FC<PieChartComponentProps> = ({ topSellingProducts }) => {
+  // Ensure the data structure is correct
+  const pieData = topSellingProducts.map((product) => ({
     name: product.item,
     value: product.weight,
   }));
@@ -44,22 +36,19 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ dashboardData }) 
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
+            {/* You can uncomment this if needed */}
+            {/* <Legend /> */}
           </PieChart>
         </ResponsiveContainer>
       </div>
-
+      {/* Data List */}
       <div className="mt-4">
         {pieData.map((entry, index) => (
-          <div
-            key={entry.name}
-            className="flex items-center justify-between mb-2"
-          >
+          <div key={entry.name} className="flex items-center justify-between mb-2">
             <div className="flex items-center">
               <div
                 className="w-3 h-3 rounded-full mr-2"
-                style={{
-                  backgroundColor: COLORS[index % COLORS.length],
-                }}
+                style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
               <span>{entry.name}</span>
             </div>

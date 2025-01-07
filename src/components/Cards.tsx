@@ -1,51 +1,59 @@
 "use client";
-import dashboardData from "../data/dashboard.json";
-import Image from "next/image"; // Import Image component from next/image
-
+import { FC } from "react";
+import Image from "next/image";
 import uparrow from "../icons/arrow/uparrow.png";
 import downarrow from "../icons/arrow/downarrow.png";
 
 // Helper function to format numbers
-const formatValue = (value: string) => {
+const formatValue = (value: string | undefined) => {
+  if (!value) return "0"; // Return "0" if value is undefined or null
   return value.split(".")[0];
 };
 
-const data = dashboardData[0];
+interface CardsProps {
+  currentData: {
+    total_sales: string;
+    total_expenses: string;
+    net_profit: string;
+    due_amount: string;
+    payment_received: string;
+  };
+}
 
-const metrics = [
-  {
-    title: "Total Sales",
-    value: formatValue(data.total_sales),
-    change: "+11.02%",
-    isPositive: true,
-  },
-  {
-    title: "Total Expenses",
-    value: formatValue(data.total_expenses),
-    change: "-0.03%",
-    isPositive: false,
-  },
-  {
-    title: "Net Profit",
-    value: formatValue(data.net_profit),
-    change: "+15.03%",
-    isPositive: true,
-  },
-  {
-    title: "Due Amount",
-    value: formatValue(data.due_amount),
-    change: "+6.08%",
-    isPositive: false,
-  },
-  {
-    title: "Payment Received",
-    value: formatValue(data.payment_received),
-    change: "+15.03%",
-    isPositive: true,
-  },
-];
+const Cards: FC<CardsProps> = ({ currentData }) => {
+  const metrics = [
+    {
+      title: "Total Sales",
+      value: formatValue(currentData.total_sales),
+      change: "+11.02%",
+      isPositive: true,
+    },
+    {
+      title: "Total Expenses",
+      value: formatValue(currentData.total_expenses),
+      change: "-0.03%",
+      isPositive: false,
+    },
+    {
+      title: "Net Profit",
+      value: formatValue(currentData.net_profit),
+      change: "+15.03%",
+      isPositive: true,
+    },
+    {
+      title: "Due Amount",
+      value: formatValue(currentData.due_amount),
+      change: "+6.08%",
+      isPositive: false,
+    },
+    {
+      title: "Payment Received",
+      value: formatValue(currentData.payment_received),
+      change: "+15.03%",
+      isPositive: true,
+    },
+  ];
 
-export const OverviewCards = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold text-gray-700">Overview</h2>
@@ -87,3 +95,5 @@ export const OverviewCards = () => {
     </div>
   );
 };
+
+export default Cards;

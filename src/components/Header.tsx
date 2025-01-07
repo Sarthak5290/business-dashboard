@@ -1,7 +1,7 @@
-"use client";
+"use client"
 import { Search, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import Image from "next/image"; // Import Image component from next/image
+import Image from "next/image"; // Importing next/image for optimized images
 import profile from "../icons/user/profile.png";
 import notification from "../icons/user/notification.png";
 import firm from "../icons/user/firm.png";
@@ -10,7 +10,6 @@ import help from "../icons/user/help.png";
 import about from "../icons/user/about.png";
 import logout from "../icons/user/logout.png";
 import notificationIcon from "../icons/user/notification.png";
-import profile2 from "../icons/profile.png";
 
 export const Header = () => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -47,6 +46,7 @@ export const Header = () => {
             <Image
               src={notification}
               alt="Notifications"
+              className="h-5 w-5"
               width={20}
               height={20}
             />
@@ -56,11 +56,12 @@ export const Header = () => {
           {isNotificationDropdownOpen && (
             <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg">
               <ul className="py-2">
-                {/* First notification with notification icon */}
+                {/* First notification */}
                 <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-center space-x-3">
                   <Image
                     src={notificationIcon}
                     alt="Notification"
+                    className="h-4 w-4"
                     width={16}
                     height={16}
                   />
@@ -70,9 +71,15 @@ export const Header = () => {
                   </span>
                 </li>
 
-                {/* Second notification with user icon */}
+                {/* Second notification */}
                 <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-center space-x-3">
-                  <Image src={profile} alt="User" width={16} height={16} />
+                  <Image
+                    src={profile}
+                    alt="User"
+                    className="h-4 w-4"
+                    width={16}
+                    height={16}
+                  />
                   <span>
                     New user registered.{" "}
                     <span className="text-gray-400 text-xs">
@@ -81,11 +88,12 @@ export const Header = () => {
                   </span>
                 </li>
 
-                {/* Third notification with notification icon */}
+                {/* Other notifications */}
                 <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-center space-x-3">
                   <Image
                     src={notificationIcon}
                     alt="Notification"
+                    className="h-4 w-4"
                     width={16}
                     height={16}
                   />
@@ -94,12 +102,11 @@ export const Header = () => {
                     <span className="text-gray-400 text-xs">12 hours ago</span>
                   </span>
                 </li>
-
-                {/* Fourth notification with notification icon */}
                 <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer flex items-center space-x-3">
                   <Image
                     src={notificationIcon}
                     alt="Notification"
+                    className="h-4 w-4"
                     width={16}
                     height={16}
                   />
@@ -120,15 +127,13 @@ export const Header = () => {
             onClick={toggleProfileDropdown}
           >
             <Image
-              src={profile2}
+              src="/profile.png" // Assuming this image is in the 'public' folder
               alt="Profile"
               className="h-8 w-8 rounded-full"
               width={32}
               height={32}
             />
-            <span className="text-sm font-medium text-gray-700">
-              Evan Yates
-            </span>
+            <span className="text-sm font-medium text-gray-700">Evan Yates</span>
             <ChevronDown className="h-4 w-4 text-gray-500" />
           </div>
 
@@ -136,9 +141,16 @@ export const Header = () => {
           {isProfileDropdownOpen && (
             <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg">
               <ul className="py-1">
+                {/* Menu items */}
                 <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-3">
                   <div className="bg-[var(--Primary-Purple, #E5ECF6)] p-1 rounded-full">
-                    <Image src={profile} alt="Profile" width={16} height={16} />
+                    <Image
+                      src={profile}
+                      alt="Profile"
+                      className="h-4 w-4"
+                      width={16}
+                      height={16}
+                    />
                   </div>
                   <span>Profile</span>
                 </li>
@@ -147,6 +159,7 @@ export const Header = () => {
                     <Image
                       src={notification}
                       alt="Notifications"
+                      className="h-4 w-4"
                       width={16}
                       height={16}
                     />
@@ -158,6 +171,7 @@ export const Header = () => {
                     <Image
                       src={firm}
                       alt="Change Firm"
+                      className="h-4 w-4"
                       width={16}
                       height={16}
                     />
@@ -169,6 +183,7 @@ export const Header = () => {
                     <Image
                       src={settings}
                       alt="Settings"
+                      className="h-4 w-4"
                       width={16}
                       height={16}
                     />
@@ -180,6 +195,7 @@ export const Header = () => {
                     <Image
                       src={help}
                       alt="Help/Support"
+                      className="h-4 w-4"
                       width={16}
                       height={16}
                     />
@@ -191,6 +207,7 @@ export const Header = () => {
                     <Image
                       src={about}
                       alt="About (Version Info)"
+                      className="h-4 w-4"
                       width={16}
                       height={16}
                     />
@@ -199,7 +216,13 @@ export const Header = () => {
                 </li>
                 <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-3">
                   <div className="bg-[var(--Primary-Purple, #E5ECF6)] p-1 rounded-full">
-                    <Image src={logout} alt="Logout" width={16} height={16} />
+                    <Image
+                      src={logout}
+                      alt="Logout"
+                      className="h-4 w-4"
+                      width={16}
+                      height={16}
+                    />
                   </div>
                   <span>Logout</span>
                 </li>

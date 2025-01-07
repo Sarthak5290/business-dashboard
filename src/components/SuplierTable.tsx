@@ -1,41 +1,26 @@
-"use client";
+"use client"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-// Define types for the props and data structure
 interface SupplierPayment {
-  record_no: number;
+  record_no: string;
   farmer_name: string;
   net_amount: number;
   paid_amount: number;
   due_amount: number;
-  payment_status: string;
-}
-
-interface DashboardData {
-  supplier_payments: SupplierPayment[];
+  payment_status: "Paid" | "Pending";
 }
 
 interface SupplierTableProps {
-  dashboardData: DashboardData[];
+  supplierData: SupplierPayment[]; // Define the expected structure of supplierData
 }
 
-const SupplierTable: React.FC<SupplierTableProps> = ({ dashboardData }) => {
-  const supplierData = dashboardData[0].supplier_payments;
-
+export const SupplierTable: React.FC<SupplierTableProps> = ({ supplierData }) => {
   return (
     <div className="rounded-lg border mt-6">
-      <h2 className="text-xl ml-5 mt-4 font-bold text-black mb-4">
-        Recent Supplier Payments
-      </h2>
+      {/* Title */}
+      <h2 className="text-xl ml-5 mt-4 font-bold text-black mb-4">Recent Supplier Payments</h2>
 
+      {/* Table */}
       <Table>
         <TableHeader>
           <TableRow>
@@ -73,5 +58,3 @@ const SupplierTable: React.FC<SupplierTableProps> = ({ dashboardData }) => {
     </div>
   );
 };
-
-export default SupplierTable;

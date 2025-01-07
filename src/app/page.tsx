@@ -1,7 +1,6 @@
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
-import { OverviewCards } from "@/components/OverviewCards";
-import Charts from "@/components/Charts";
+import { Overview } from "@/components/Overview";
 
 const Index = () => {
   return (
@@ -18,8 +17,7 @@ const Index = () => {
         <main className="flex-1 overflow-y-auto p-6">
           <div className="container mx-auto">
             {/* Content */}
-            <OverviewCards />
-            <Charts />
+            <Overview></Overview>
           </div>
         </main>
       </div>
