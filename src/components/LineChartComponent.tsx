@@ -1,5 +1,4 @@
-// src/components/LineChartComponent.tsx
-"use client"
+"use client";
 
 import {
   LineChart,
@@ -11,10 +10,30 @@ import {
   ResponsiveContainer,
   Area,
 } from "recharts";
-import dashboardData from "../data/dashboard.json";
-import { FaCaretDown } from "react-icons/fa"; // Correct import for FaCaretDown
+import { FaCaretDown } from "react-icons/fa";
 
-const LineChartComponent = () => {
+// Define types for the props and data structure
+interface SupplierRecord {
+  month: string;
+  bags: number;
+}
+
+interface CustomerRecord {
+  bags: number;
+}
+
+interface DashboardData {
+  supplier_records: SupplierRecord[];
+  customer_records: CustomerRecord[];
+}
+
+interface LineChartComponentProps {
+  dashboardData: DashboardData[];
+}
+
+const LineChartComponent: React.FC<LineChartComponentProps> = ({
+  dashboardData,
+}) => {
   // Safely access and transform data
   const lineData =
     dashboardData?.[0]?.supplier_records?.map((item, index) => ({
@@ -25,11 +44,9 @@ const LineChartComponent = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm">
-      {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex ml-8 items-center gap-2">
           <h3 className="text-lg font-semibold">Bags</h3>
-          {/* Vertical line between Bags and Month */}
           <div className="h-4 w-px bg-gray-300"></div>
           <div className="border rounded px-3 py-1 text-sm text-gray-600 flex items-center">
             month <FaCaretDown className="ml-1 text-gray-600" />
@@ -41,15 +58,13 @@ const LineChartComponent = () => {
         <ResponsiveContainer width="100%" height={300}>
           <LineChart
             data={lineData}
-            margin={{ top: 5, right: 30, left: 20, bottom: 30 }} // Add bottom margin for labels
+            margin={{ top: 5, right: 30, left: 20, bottom: 30 }}
           >
-            {/* Light Blue Background */}
             <Area
               type="monotone"
               dataKey="supplier"
               stroke="none"
-              fill="rgba(173, 216, 230, 0.2)" // Light blue shadow across the chart
-              isAnimationActive={false}
+              fill="rgba(173, 216, 230, 0.2)"
             />
             <CartesianGrid
               strokeDasharray="3 3"
@@ -81,7 +96,6 @@ const LineChartComponent = () => {
               }}
               cursor={{ stroke: "#f0f0f0" }}
             />
-            {/* Black Line */}
             <Line
               type="monotone"
               dataKey="supplier"
@@ -91,7 +105,6 @@ const LineChartComponent = () => {
               name="Supplier Records"
               activeDot={{ r: 4, fill: "#1f2937" }}
             />
-            {/* Blue Line */}
             <Line
               type="monotone"
               dataKey="customer"
@@ -108,7 +121,6 @@ const LineChartComponent = () => {
         <p className="text-gray-500 text-center">No data available</p>
       )}
 
-      {/* Legend Section Below X-Axis */}
       <div className="flex justify-center gap-4 mt-4 text-sm">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-gray-800"></div>

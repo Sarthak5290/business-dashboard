@@ -1,7 +1,7 @@
 import { Sidebar } from "@/components/Sidebar";
 import { Header } from "@/components/Header";
 import { OverviewCards } from "@/components/OverviewCards";
-import { Charts } from "@/components/Charts";
+import Charts from "@/components/Charts";
 
 const Index = () => {
   return (
