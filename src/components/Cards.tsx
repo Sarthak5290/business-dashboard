@@ -4,9 +4,8 @@ import Image from "next/image";
 import uparrow from "../icons/arrow/uparrow.png";
 import downarrow from "../icons/arrow/downarrow.png";
 
-// Helper function to format numbers
 const formatValue = (value: string | undefined) => {
-  if (!value) return "0"; // Return "0" if value is undefined or null
+  if (!value) return "0";
   return value.split(".")[0];
 };
 
@@ -55,13 +54,15 @@ const Cards: FC<CardsProps> = ({ currentData }) => {
   ];
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-gray-700">Overview</h2>
-      <div className="grid grid-cols-5 gap-4">
+    <div className="space-y-4 md:space-y-6 p-4 md:p-6">
+      <h2 className="text-2xl md:text-[30px] font-medium leading-normal md:leading-[20px] decoration-skip-ink-none">
+        Overview
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {metrics.map((metric) => (
           <div
             key={metric.title}
-            className={`rounded-lg p-4 shadow-sm ${
+            className={`rounded-xl p-4 shadow-sm ${
               metric.title === "Total Sales" ||
               metric.title === "Net Profit" ||
               metric.title === "Payment Received"
@@ -69,23 +70,25 @@ const Cards: FC<CardsProps> = ({ currentData }) => {
                 : "bg-[#E2E5EA]"
             }`}
           >
-            <h3 className="text-sm text-black mb-2">{metric.title}</h3>
+            <h3 className="text-sm text-black mb-2 font-medium">{metric.title}</h3>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-semibold">{metric.value}</span>
+              <span className="text-lg md:text-[24px] font-semibold truncate">
+                {metric.value}
+              </span>
               <div
-                className={`flex items-center ${
+                className={`flex items-center space-x-1 ${
                   metric.isPositive ? "text-green-500" : "text-red-500"
                 }`}
               >
-                <span className="text-sm">{metric.change}</span>
+                <span className="text-xs md:text-sm whitespace-nowrap">
+                  {metric.change}
+                </span>
                 <Image
                   src={metric.isPositive ? uparrow : downarrow}
                   alt="Arrow Icon"
                   width={16}
                   height={16}
-                  className={`h-4 w-4 ${
-                    metric.isPositive ? "text-green-500" : "text-red-500"
-                  }`}
+                  className="h-3 w-3 md:h-4 md:w-4"
                 />
               </div>
             </div>

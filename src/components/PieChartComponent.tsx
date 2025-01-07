@@ -9,7 +9,9 @@ interface PieChartComponentProps {
   topSellingProducts: { item: string; weight: number }[]; // Define the structure of the topSellingProducts
 }
 
-const PieChartComponent: React.FC<PieChartComponentProps> = ({ topSellingProducts }) => {
+const PieChartComponent: React.FC<PieChartComponentProps> = ({
+  topSellingProducts,
+}) => {
   // Ensure the data structure is correct
   const pieData = topSellingProducts.map((product) => ({
     name: product.item,
@@ -17,9 +19,11 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ topSellingProduct
   }));
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm">
-      <h3 className="text-lg font-semibold ml-20 mb-6">Top Selling Items</h3>
-      <div className="h-[190px]">
+    <div className="bg-white p-6 rounded-xl shadow-sm">
+      <h3 className="text-lg font-semibold text-center lg:text-left mb-6">
+        Top Selling Items
+      </h3>
+      <div className="h-[190px] lg:h-[250px]">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -31,9 +35,13 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ topSellingProduct
               fill="#8884d8"
               paddingAngle={5}
               dataKey="value"
+              animationDuration={2000} // Slower animation (2 seconds)
             >
               {pieData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             {/* You can uncomment this if needed */}
@@ -44,10 +52,13 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ topSellingProduct
       {/* Data List */}
       <div className="mt-4">
         {pieData.map((entry, index) => (
-          <div key={entry.name} className="flex items-center justify-between mb-2">
+          <div
+            key={entry.name}
+            className="flex items-center justify-between mb-2 text-sm lg:text-base"
+          >
             <div className="flex items-center">
               <div
-                className="w-3 h-3 rounded-full mr-2"
+                className="w-3 h-3 lg:w-4 lg:h-4 rounded-full mr-2"
                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
               <span>{entry.name}</span>

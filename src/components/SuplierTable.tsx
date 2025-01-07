@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface SupplierPayment {
@@ -16,14 +16,14 @@ interface SupplierTableProps {
 
 export const SupplierTable: React.FC<SupplierTableProps> = ({ supplierData }) => {
   return (
-    <div className="rounded-lg border mt-6">
+    <div className="rounded-xl border mt-6 overflow-x-auto">
       {/* Title */}
-      <h2 className="text-xl ml-5 mt-4 font-bold text-black mb-4">Recent Supplier Payments</h2>
+      <h2 className="text-xl font-bold text-black ml-5 mt-4 mb-4">Recent Supplier Payments</h2>
 
       {/* Table */}
-      <Table>
+      <Table className="min-w-[640px] lg:min-w-full">
         <TableHeader>
-          <TableRow>
+          <TableRow className="text-[#1C1C1C66]">
             <TableHead>Record No</TableHead>
             <TableHead>Farmer Name</TableHead>
             <TableHead>Net Amount</TableHead>
