@@ -1,82 +1,65 @@
-1. Project Setup:
-Framework: I'll use Next.js for the project since it's great for building dynamic web applications with easy routing and API handling.
-Styling: Tailwind CSS will be used for styling to ensure quick and responsive UI development.
-Charting: I'll use Chart.js (or another library like Recharts) for rendering dynamic charts of payments, net profit, and expenses.
-Data Fetching: I'll use Next.js's built-in data fetching mechanism (either getServerSideProps or getStaticProps based on real-time or static data requirements).
-2. Design Fidelity:
-Figma Analysis: First, I’ll carefully inspect the Figma file to replicate the layout and style. I'll ensure:
-Color schemes, font sizes, and layout are closely followed.
-The UI is structured properly into components such as the sidebar, chart containers, tables, and the notification dropdown.
-I will also ensure mobile and tablet responsiveness using Tailwind CSS.
-3. Dynamic Data Rendering:
-Data Fetching: I will fetch data from the provided data.json file and display it dynamically. I’ll use Next.js’s API routes or client-side fetch to get this data.
-Handling Date Filtering:
-The date parameter in the URL (e.g., ?date=12-01-2025) will be captured using useRouter in Next.js.
-Based on the selected date, the dashboard data will be updated accordingly by filtering the relevant data from data.json.
-4. Date Filter and Query Handling:
-The selected date will be part of the URL query string, e.g., /dashboard?date=12-01-2025.
-I'll use Next.js’s useRouter hook to access and parse the query string.
-Based on the date, the appropriate data (payments, expenses, net profit) will be filtered from the JSON file and rendered.
-5. Charts:
-I'll use Chart.js to render the dynamic charts for payments, net profit, and expenses.
-The chart data will be updated whenever the date filter changes.
-The charts will be interactive (e.g., hover effects, tooltips) to allow users to explore data more effectively.
-6. Tables:
-I'll render tables to show recent supplier and customer payments, with data that updates dynamically based on the selected date.
-Each table will be paginated or scrollable for better user experience.
-7. Sidebar and Notifications:
-I will implement the sidebar with a simple responsive design (using Tailwind CSS) that can be toggled in mobile views.
-The notification dropdown will show data based on the context, such as new updates or alerts.
-8. Responsiveness:
-The UI will be made fully responsive using Tailwind CSS’s utility classes like sm:, md:, and lg: to ensure it adapts well across devices.
-I’ll test on both desktop and tablet screens to ensure smooth layout adjustments.
-9. Code Organization:
-The code will be modular, with clear separation between UI components (e.g., charts, tables, sidebar).
-I’ll maintain clean code with proper comments, and I will make use of Next.js’s file-based routing to organize pages effectively.
-10. Deployment:
-I’ll deploy the application on Vercel (which integrates seamlessly with Next.js) to host the project and provide a live demo.
-The code will be committed to a GitHub repository, and the link will be shared along with the hosted project.
-Challenges & Solutions:
-Date Handling: Parsing and formatting dates accurately will be crucial to ensure the right data is displayed. I may use a library like date-fns for easier date handling and manipulation.
-Dynamic Rendering: Handling the dynamic charts and tables in sync with the changing date could be challenging, but leveraging React state management and Next.js data fetching will simplify this.
-Responsiveness: Ensuring the UI is responsive on different screen sizes may require careful testing and tweaking of Tailwind's responsive utilities.
+# Dashboard Project
 
+This project is a dynamic dashboard built with **Next.js**, **Tailwind CSS**, and **Chart.js** to display data such as payments, expenses, and net profit. The dashboard allows users to filter data by date and view dynamic charts and tables that update based on the selected date.
 
-1. Next.js:
-Why?: Next.js is an ideal framework for building React applications with features like server-side rendering (SSR), static site generation (SSG), and API routes. It allows for easy handling of dynamic routing, data fetching, and rendering.
-Key Features:
-File-based routing.
-Server-side rendering (SSR) or static site generation (SSG) for fast page loads.
-API routes for handling dynamic data.
-2. React:
-Why?: React is used as the core JavaScript library for building the user interface (UI). It provides a component-based architecture that will help in building reusable components like charts, tables, sidebar, and notification dropdown.
-Key Features:
-Component-based structure.
-React hooks for managing state (e.g., useState, useEffect, useRouter).
-3. Tailwind CSS:
-Why?: Tailwind CSS is a utility-first CSS framework that allows for rapid UI development with responsive design. It will help me build a responsive and clean UI quickly without writing custom CSS from scratch.
-Key Features:
-Utility-first approach for styling.
-Responsive design utilities (sm:, md:, lg:).
-Highly customizable via configuration.
-4. Chart.js (or Recharts):
-Why?: Chart.js is a powerful charting library that will allow me to easily integrate dynamic, interactive charts for visualizing data such as payments, expenses, and net profit.
-Key Features:
-Easy integration with React.
-Dynamic updates and interactivity (e.g., tooltips, hover effects).
-6. Vercel (for Deployment):
-Why?: Vercel is a cloud platform that is fully optimized for Next.js applications. It allows for quick and seamless deployment, ensuring that the application is live and accessible.
-Key Features:
-Seamless integration with Next.js.
-Automatic deployment from GitHub.
-Free hosting for small projects.
-7. GitHub (for Version Control and Hosting):
-Why?: GitHub will be used to host the source code and track changes through version control. It will also provide the repository link to share with the hiring team.
-Key Features:
-Version control via Git.
-Collaboration and code review features.
-8. JSON (for Data Handling):
-Why?: The data.json file provided will be used to dynamically render the dashboard content. I will fetch and filter this JSON data based on the selected date.
-Key Features:
-Simple, lightweight data format for storing and retrieving structured information.
-Easy integration with JavaScript and React.
+## Github Link
+https://github.com/Sarthak5290/business-dashboard
+
+## Approach
+
+The goal of this project was to build an interactive dashboard that displays key metrics (payments, expenses, net profit) and allows users to filter data by date.
+
+### Key Steps:
+1. **Design Fidelity**: I started by carefully analyzing the Figma design to ensure the layout, color schemes, and font sizes were accurately replicated.
+2. **Data Fetching and Filtering**: I fetched the data from a `data.json` file using **Next.js API routes** or client-side fetching. The date filter was integrated using query parameters in the URL (e.g., `/dashboard?date=12-01-2025`).
+3. **Charts & Tables**: I integrated **Chart.js** to display interactive charts and dynamic tables to show payments data. The charts were updated whenever the date filter changed.
+4. **Responsiveness**: I used **Tailwind CSS** to ensure the dashboard was responsive across different screen sizes (desktop, tablet, mobile).
+5. **Deployment**: The app was deployed on **Vercel** for seamless hosting and live demo access.
+
+## Tools & Frameworks Used
+
+1. **Next.js**:  
+   A React framework that provides file-based routing, server-side rendering (SSR), static site generation (SSG), and API routes. It was used for building the entire web application.
+
+2. **React**:  
+   A JavaScript library for building the user interface. React’s component-based architecture helped in creating reusable components for the sidebar, charts, and tables.
+
+3. **Tailwind CSS**:  
+   A utility-first CSS framework for rapidly building custom designs. I used Tailwind for responsive layouts and quick styling without writing custom CSS from scratch.
+
+4. **Chart.js**:  
+   A powerful charting library for rendering dynamic and interactive charts (e.g., bar charts, line charts) to visualize payments, expenses, and net profit.
+
+5. **Vercel**:  
+   A cloud platform optimized for hosting **Next.js** applications. Vercel was used for the deployment of the project, providing automatic deployments from GitHub.
+
+6. **GitHub**:  
+   A version control system used for hosting the project’s source code and tracking changes via Git.
+
+## Challenges Faced & Solutions
+
+### 1. Date Handling
+**Challenge**: Properly parsing and formatting dates to ensure accurate data display based on the selected date.
+**Solution**: I used the **`date-fns`** library to handle date formatting and parsing efficiently. This library allowed me to work with dates in a consistent manner and easily filter data based on the selected date.
+
+### 2. Dynamic Data Rendering
+**Challenge**: Ensuring that the charts and tables update dynamically when the date filter changes.
+**Solution**: By leveraging **React state management** and **Next.js's built-in data fetching** capabilities (such as `getServerSideProps` or `useEffect`), I was able to update the data dynamically and re-render the relevant charts and tables without page reloads.
+
+### 3. Responsiveness
+**Challenge**: Making sure the dashboard layout adapted smoothly across different screen sizes, especially for mobile and tablet views.
+**Solution**: I used **Tailwind CSS**'s responsive utilities (`sm:`, `md:`, `lg:`) to create a flexible layout that adjusts based on the screen size. Testing on different devices ensured that the design worked well across all sizes.
+
+### 4. Managing Complex State
+**Challenge**: Managing the state for dynamic components like charts and tables that depend on the date selection.
+**Solution**: I used **React hooks** such as `useState`, `useEffect`, and `useRouter` to manage the state and URL query parameters efficiently. This ensured that when the date filter changed, the state was updated and the UI re-rendered the correct data.
+
+## Conclusion
+
+This project demonstrates a complete full-stack dashboard with interactive charts, dynamic data rendering, and a responsive UI. The use of **Next.js**, **React**, **Tailwind CSS**, and **Chart.js** helped in creating an efficient and scalable web application. The challenges faced during development, such as date handling and responsive design, were addressed through well-suited libraries and techniques. 
+
+The project is deployed on **Vercel**, and the source code is hosted on **GitHub** for version control and collaboration.
+
+---
+
+Feel free to explore the demo and source code, and if you have any questions or feedback, please feel free to reach out!
