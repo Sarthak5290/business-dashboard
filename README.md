@@ -38,19 +38,15 @@ The goal of this project was to build an interactive dashboard that displays key
 
 ## Challenges Faced & Solutions
 
-### 1. Date Handling
-**Challenge**: Properly parsing and formatting dates to ensure accurate data display based on the selected date.
-**Solution**: I used the **`date-fns`** library to handle date formatting and parsing efficiently. This library allowed me to work with dates in a consistent manner and easily filter data based on the selected date.
-
-### 2. Dynamic Data Rendering
+### 1. Dynamic Data Rendering
 **Challenge**: Ensuring that the charts and tables update dynamically when the date filter changes.
 **Solution**: By leveraging **React state management** and **Next.js's built-in data fetching** capabilities (such as `getServerSideProps` or `useEffect`), I was able to update the data dynamically and re-render the relevant charts and tables without page reloads.
 
-### 3. Responsiveness
+### 2. Responsiveness
 **Challenge**: Making sure the dashboard layout adapted smoothly across different screen sizes, especially for mobile and tablet views.
 **Solution**: I used **Tailwind CSS**'s responsive utilities (`sm:`, `md:`, `lg:`) to create a flexible layout that adjusts based on the screen size. Testing on different devices ensured that the design worked well across all sizes.
 
-### 4. Managing Complex State
+### 3. Managing Complex State
 **Challenge**: Managing the state for dynamic components like charts and tables that depend on the date selection.
 **Solution**: I used **React hooks** such as `useState`, `useEffect`, and `useRouter` to manage the state and URL query parameters efficiently. This ensured that when the date filter changed, the state was updated and the UI re-rendered the correct data.
 
