@@ -40,30 +40,40 @@ interface DashboardData {
 }
 
 // Define the correct route segment config
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
-// Define the params type as a Promise
-type Params = Promise<{ date: string }>;
+// Define the params type
+interface Params {
+  params: { date: string };
+}
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Params }
-) {
+export async function GET(request: NextRequest, { params }: Params) {
   try {
-    // Await the params
-    const { date } = await params;
+    // Extract the date parameter
+    const { date } = params;
 
-    // Validate date parameter
+    // Validate the date parameter
     if (!date) {
+      console.error("Missing date parameter in request.");
       return NextResponse.json(
         { error: "Date parameter is required" },
         { status: 400 }
       );
     }
 
+    console.log("Received date parameter:", date);
+
     // Connect to MongoDB
     const { db } = await connectToDatabase();
+    if (!db) {
+      console.error("Failed to connect to MongoDB.");
+      return NextResponse.json(
+        { error: "Database connection failed" },
+        { status: 500 }
+      );
+    }
+
     const collection = db.collection("dashboard_data");
 
     // Fetch data for the specified date
@@ -71,11 +81,14 @@ export async function GET(
 
     // Check if data exists
     if (!data) {
+      console.warn("No data found for the specified date:", date);
       return NextResponse.json(
         { error: "No data found for the specified date" },
         { status: 404 }
       );
     }
+
+    console.log("Data fetched successfully:", data);
 
     // Cast the data to the correct type
     const dashboardData = data as unknown as DashboardData;
@@ -94,7 +107,7 @@ export async function GET(
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal Server Error", details: String(error) },
       { status: 500 }
     );
   }
