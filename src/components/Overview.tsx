@@ -15,11 +15,11 @@ const DynamicDashboard = () => {
   const [error, setError] = useState<string | null>(null);
   const params = useParams();
 
-  const dateString = typeof params?.date === 'string'
-    ? params.date
-    : Array.isArray(params?.date)
-    ? params.date[0]
-    : null;
+  const dateString = "05-01-2025"
+
+  // Debugging: Log the dateString and params
+  console.log('dateString:', dateString);
+  console.log('params:', params);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -40,6 +40,9 @@ const DynamicDashboard = () => {
 
         const result: ApiResponse = await response.json();
 
+        // Debugging: Log the API response
+        console.log('API Response:', result);
+
         if (result.success && result.data) {
           setData(result.data);
         } else {
@@ -55,6 +58,7 @@ const DynamicDashboard = () => {
     fetchDashboardData();
   }, [dateString]);
 
+  // If loading, show loading spinner
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -63,6 +67,7 @@ const DynamicDashboard = () => {
     );
   }
 
+  // If there's an error, display the error message
   if (error) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -71,6 +76,7 @@ const DynamicDashboard = () => {
     );
   }
 
+  // If no data is available, display a no data message
   if (!data) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -79,6 +85,7 @@ const DynamicDashboard = () => {
     );
   }
 
+  // Render the dashboard if data is available
   return (
     <main className="p-4 md:p-6 max-w-7xl mx-auto">
       <Cards currentData={data} />
