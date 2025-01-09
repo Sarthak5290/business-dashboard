@@ -43,13 +43,19 @@ interface DashboardData {
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+// Define the params type as a Promise
+type Params = Promise<{ date: string }>;
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { date: string } }
+  { params }: { params: Params }
 ) {
   try {
+    // Await the params
+    const { date } = await params;
+
     // Validate date parameter
-    if (!params?.date) {
+    if (!date) {
       return NextResponse.json(
         { error: "Date parameter is required" },
         { status: 400 }
@@ -61,7 +67,7 @@ export async function GET(
     const collection = db.collection("dashboard_data");
 
     // Fetch data for the specified date
-    const data = await collection.findOne({ date: params.date });
+    const data = await collection.findOne({ date });
 
     // Check if data exists
     if (!data) {
@@ -72,7 +78,7 @@ export async function GET(
     }
 
     // Cast the data to the correct type
-    const dashboardData = data as DashboardData;
+    const dashboardData = data as unknown as DashboardData;
 
     // Return the dashboard data
     return NextResponse.json(

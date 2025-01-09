@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Nunito_Sans } from "next/font/google"; // Import the font from next/font/google
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -30,6 +31,8 @@ const menuItems = [
 ];
 
 export const Sidebar = () => {
+  const [activeItem, setActiveItem] = useState<string | null>(null);
+
   return (
     <div
       className={`w-64 lg:w-72 min-h-screen bg-white border-r border-gray-200 flex flex-col sticky top-0 z-10 ${nunitoSans.variable}`} // Apply font variable here
@@ -53,9 +56,10 @@ export const Sidebar = () => {
             href={item.link.replace("[date]", item.date)} // Dynamic link based on the date
             className={cn(
               "flex items-center space-x-3 px-4 py-3 mb-1 text-gray-600 hover:bg-gray-50 hover:rounded-full font-sans",
-              item.active && "bg-blue-50 text-[#00AEEF]",
+              activeItem === item.label && "bg-blue-50 text-[#00AEEF]", // Apply active styles
               index === 0 && "pr-6" // Padding to make space for the line
             )}
+            onClick={() => setActiveItem(item.label)} // Set active item on click
           >
             <Image
               src={item.icon}

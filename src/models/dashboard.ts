@@ -35,3 +35,4 @@ const DashboardSchema = new Schema<IDashboard>({
 });
 
 export const Dashboard = mongoose.model<IDashboard>('Dashboard', DashboardSchema);
+

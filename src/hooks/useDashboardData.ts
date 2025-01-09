@@ -18,7 +18,7 @@ interface DashboardData {
     paid_amount: string;
     due_amount: number;
     payment_status: string;
-  }>;
+  }> ;
 }
 
 interface UseDashboardDataReturn {
@@ -50,7 +50,6 @@ export function useDashboardData(date: string): UseDashboardDataReturn {
       if (result.success) {
         setData(result.data);
         toast({
-          variant: "success",
           title: "Data Loaded Successfully",
           description: `Dashboard data for ${date} fetched successfully.`,
         });
