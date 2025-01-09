@@ -23,11 +23,36 @@ const nunitoSans = Nunito_Sans({
 
 // Sidebar menu items with links (dynamic routing)
 const menuItems = [
-  { icon: dashboard, label: "Dashboard", link: "/dashboard/[date]", date: "01-01-2025" },
-  { icon: menu1, label: "Menu 1", link: "/dashboard/[date]", date: "02-01-2025" },
-  { icon: menu2, label: "Menu 2", link: "/dashboard/[date]", date: "03-01-2025" },
-  { icon: menu3, label: "Menu 3", link: "/dashboard/[date]", date: "04-01-2025" },
-  { icon: adminPanel, label: "Admin Panel", link: "/dashboard/[date]", date: "05-01-2025" },
+  {
+    icon: dashboard,
+    label: "Dashboard",
+    link: "/dashboard/[date]",
+    date: "01-01-2025",
+  },
+  {
+    icon: menu1,
+    label: "Menu 1",
+    link: "/dashboard/[date]",
+    date: "02-01-2025",
+  },
+  {
+    icon: menu2,
+    label: "Menu 2",
+    link: "/dashboard/[date]",
+    date: "03-01-2025",
+  },
+  {
+    icon: menu3,
+    label: "Menu 3",
+    link: "/dashboard/[date]",
+    date: "04-01-2025",
+  },
+  {
+    icon: adminPanel,
+    label: "Admin Panel",
+    link: "/dashboard/[date]",
+    date: "05-01-2025",
+  },
 ];
 
 export const Sidebar = () => {
@@ -43,8 +68,17 @@ export const Sidebar = () => {
       }}
     >
       <div className="p-6">
-        <Image src={logo} alt="Logo" width={200} height={60} className="lg:w-56" />
+        <Link href="/" passHref>
+          <Image
+            src={logo}
+            alt="Logo"
+            width={200}
+            height={60}
+            className="lg:w-56 cursor-pointer"
+          />
+        </Link>
       </div>
+
       <nav className="flex-1 pt-8 px-4 relative">
         <div
           className="absolute top-9 right-0 h-10 w-1 bg-[#00AEEF]"
